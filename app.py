@@ -6,8 +6,6 @@ from flask_mail import Mail, Message
 from dotenv import load_dotenv
 from drive_utils import upload_to_drive  # New import for Drive upload
 
-
-
 # Load environment variables
 load_dotenv()
 
