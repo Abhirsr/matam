@@ -1,3 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.env
+
+# Environment & Secrets
 .env
-facematchapp-463008-223021026c1a.json
+*.json
+
+# OS-specific
 .DS_Store
+
+# FaceMatch credentials
+facematchapp-463008-223021026c1a.json
+
+# VSCode or IDE
+.vscode/
+.idea/
+
+# Flask cache
+instance/
+*.db
+
+# Git
+.git/
