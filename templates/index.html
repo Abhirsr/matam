@@ -20,11 +20,36 @@
       <p>Capture your face and we’ll upload matching images to Google Drive.</p>
 
       <div id="form-section">
+        <!-- 🔗 Google Drive Link Upload -->
+        <div id="drive-link-section" style="margin-bottom: 20px;">
+          <input
+            type="text"
+            id="driveLink"
+            placeholder="Paste your Google Drive folder link here"
+            style="width: 100%; padding: 10px;"
+          />
+          <button onclick="uploadDriveLink()" class="btn" style="margin-top: 10px;">
+            📂 Upload Google Drive Link
+          </button>
+        </div>
+
+        <!-- 🗑️ Delete Gallery -->
+        <div style="margin-bottom: 30px;">
+          <button onclick="clearGallery()" class="btn" style="background-color: #e74c3c; color: white;">
+            🗑️ Delete Gallery Images
+          </button>
+        </div>
+
+        <!-- 🎥 Camera Feed -->
         <div class="video-box">
           <video id="video" autoplay></video>
           <canvas id="canvas" style="display: none"></canvas>
         </div>
+
+        <!-- 📸 Capture Button -->
         <button onclick="capture()" class="btn">📸 Capture & Match</button>
+
+        <!-- ⏳ Loading Overlay -->
         <div id="loading" class="overlay">
           <div class="loader-box">
             <div class="spinner"></div>
