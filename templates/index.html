@@ -10,6 +10,17 @@
   </head>
   <body>
     <div id="particles-js"></div>
+    <div class="top-bar" style="width:100%;display:flex;justify-content:flex-end;align-items:center;position:absolute;top:0;left:0;padding:16px 24px;z-index:10;">
+      <div style="margin-right:auto;color:#e67e22;font-weight:500;font-size:1em;max-width:420px;">
+        ⚠️ Please do not log in as admin while capturing or sending email. This may interrupt your process.
+      </div>
+      {% if session.admin_logged_in %}
+        <a href="/admin/dashboard" class="btn" style="width:auto;margin-right:10px;">Admin Dashboard</a>
+        <a href="/admin/logout" class="btn" style="width:auto;background:#e74c3c;color:#fff;">Logout</a>
+      {% else %}
+        <a href="/admin/login?show=1" class="btn" style="width:auto;">Admin Login</a>
+      {% endif %}
+    </div>
     <div class="container">
       <img
         class="top-banner"
@@ -20,25 +31,7 @@
       <p>Capture your face and we’ll upload matching images to Google Drive.</p>
 
       <div id="form-section">
-        <!-- 🔗 Google Drive Link Upload -->
-        <div id="drive-link-section" style="margin-bottom: 20px;">
-          <input
-            type="text"
-            id="driveLink"
-            placeholder="Paste your Google Drive folder link here"
-            style="width: 100%; padding: 10px;"
-          />
-          <button onclick="uploadDriveLink()" class="btn" style="margin-top: 10px;">
-            📂 Upload Google Drive Link
-          </button>
-        </div>
-
-        <!-- 🗑️ Delete Gallery -->
-        <div style="margin-bottom: 30px;">
-          <button onclick="clearGallery()" class="btn" style="background-color: #e74c3c; color: white;">
-            🗑️ Delete Gallery Images
-          </button>
-        </div>
+        <!-- REMOVED: Drive link upload for users. Now only admin can upload from dashboard. -->
 
         <!-- 🎥 Camera Feed -->
         <div class="video-box">
@@ -59,6 +52,7 @@
       </div>
     </div>
 
+    <script src="{{ url_for('static', filename='particles.js') }}"></script>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
   </body>
 </html>

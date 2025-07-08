@@ -16,42 +16,6 @@ if (video) {
         });
 }
 
-// 📂 Handle Drive link upload
-function uploadDriveLink() {
-    const driveLink = document.getElementById('driveLink').value.trim();
-    if (!driveLink || !driveLink.includes("drive.google.com")) {
-        alert("⚠️ Please enter a valid Google Drive folder link.");
-        return;
-    }
-
-    // Disable button during processing
-    const uploadBtn = event.target;
-    uploadBtn.disabled = true;
-    uploadBtn.textContent = "🔄 Downloading from Drive...";
-
-    fetch('/download_drive_images', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ link: driveLink })
-    })
-    .then(res => res.json())
-    .then(data => {
-        if (data.status === 'ok') {
-            alert("✅ Drive images downloaded successfully.");
-        } else {
-            alert("❌ Failed to download images: " + data.message);
-        }
-    })
-    .catch(err => {
-        console.error("Drive link error:", err);
-        alert("⚠️ Could not process Drive link.");
-    })
-    .finally(() => {
-        uploadBtn.disabled = false;
-        uploadBtn.textContent = "📂 Upload Google Drive Link";
-    });
-}
-
 // 📸 Capture face
 function capture() {
     storedEmail = null;
@@ -206,3 +170,7 @@ function resetApp() {
             window.location.reload();
         });
 }
+/* particlesJS.load(@dom-id, @path-json, @callback (optional)); */
+particlesJS.load('particles-js', '/static/particles.json', function() {
+    console.log('callback - particles.js config loaded');
+  });
