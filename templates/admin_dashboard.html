@@ -398,6 +398,7 @@
     </style>
 </head>
 <body>
+    <div id="particles-js"></div>
     <!-- Hamburger Menu -->
     <div class="hamburger" id="hamburger">
         <span></span>
@@ -532,6 +533,12 @@
             </div>
         </div>
     </div>
+    <script src="{{ url_for('static', filename='particles.js') }}"></script>
+    <script>
+        if (window.particlesJS) {
+          particlesJS.load('particles-js', '{{ url_for('static', filename='particles.json') }}');
+        }
+    </script>
     <script>
         // Sidebar highlight animation with glassmorphism and smooth transitions
         const driveTab = document.getElementById('driveTab');
