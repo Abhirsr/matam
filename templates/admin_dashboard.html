@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <style>
@@ -117,21 +118,298 @@
             box-shadow: 0 2px 12px rgba(255,216,107,0.13);
         }
         @media (max-width: 700px) {
-            .dashboard-container { flex-direction: column; }
-            .sidebar { width: 100%; flex-direction: row; padding-top: 0; border-radius: 0; }
-            .sidebar-nav { flex-direction: row; }
-            .sidebar button, .sidebar .logout-link { flex: 1; padding: 14px 0; font-size: 1em; }
-            .main-content { padding: 20px 5px; }
+            @media (max-width: 700px) {
+                .hamburger {
+                    display: flex;
+                    position: fixed;
+                    top: 20px;
+                    left: 20px;
+                    z-index: 2000; /* Make sure it's above the sidebar */
+                }
+}
+            .dashboard-container { 
+                flex-direction: column; 
+                min-height: 100vh;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .sidebar { 
+                width: 280px;
+                position: fixed;
+                left: -280px;
+                top: 0;
+                height: 100vh;
+                flex-direction: column; 
+                padding: 80px 20px 20px 20px; 
+                border-radius: 0; 
+                max-height: none;
+                overflow-y: auto;
+                transition: left 0.3s ease;
+                z-index: 1001;
+            }
+            .sidebar.active {
+                left: 0;
+            }
+            .sidebar h2 {
+                display: block;
+                font-size: 1.4em;
+                margin-bottom: 20px;
+            }
+            .sidebar-nav { 
+                flex-direction: column; 
+                gap: 8px;
+                width: 100%;
+            }
+            .sidebar button, .sidebar .logout-link { 
+                flex: none; 
+                padding: 12px 15px; 
+                font-size: 0.95em; 
+                margin: 2px 0;
+                width: 100%;
+                text-align: left;
+            }
+            .sidebar .highlight {
+                display: none;
+            }
+            .main-content { 
+                padding: 80px 15px 15px 15px; 
+                flex: 1;
+                width: 100%;
+            }
+            .glass-section {
+                padding: 20px 15px;
+                margin-bottom: 15px;
+            }
+            .glass-section h2 {
+                font-size: 1.3em;
+                margin-bottom: 15px;
+            }
+            .btn {
+                padding: 12px;
+                font-size: 0.95em;
+            }
+            input[type="text"], input[type="file"], input[type="email"], input[type="password"] {
+                padding: 10px;
+                font-size: 0.9em;
+                margin-bottom: 10px;
+            }
+            /* Table responsive */
+            table {
+                font-size: 0.8em;
+            }
+            th, td {
+                padding: 6px 4px !important;
+            }
+            /* User logs section mobile */
+            #userLogsSection {
+                padding: 0;
+            }
+            #userLogsSection > div:first-child {
+                padding: 15px 10px 10px 10px;
+                flex-direction: column;
+                gap: 10px;
+            }
+            #userLogsSearch {
+                min-width: 100%;
+                max-width: 100%;
+                font-size: 0.9em;
+            }
+            #userLogsTable {
+                font-size: 0.75em;
+            }
+            #userLogsTable th, #userLogsTable td {
+                padding: 6px 3px !important;
+            }
+        }
+        
+        /* Enhanced mobile responsive design */
+        @media (max-width: 600px) {
+            .sidebar { 
+                width: 260px;
+                left: -260px;
+                padding: 70px 15px 15px 15px;
+            }
+            .sidebar h2 {
+                font-size: 1.2em;
+                margin-bottom: 15px;
+            }
+            .sidebar button, .sidebar .logout-link { 
+                padding: 10px 12px; 
+                font-size: 0.85em; 
+            }
+            .main-content { 
+                padding: 70px 10px 10px 10px; 
+            }
+            .glass-section {
+                padding: 15px 12px;
+                margin-bottom: 12px;
+            }
+            .glass-section h2 {
+                font-size: 1.2em;
+                margin-bottom: 12px;
+            }
+            .btn {
+                padding: 10px;
+                font-size: 0.9em;
+            }
+            input[type="text"], input[type="file"], input[type="email"], input[type="password"] {
+                padding: 8px;
+                font-size: 0.85em;
+                margin-bottom: 8px;
+            }
+            /* Table responsive */
+            table {
+                font-size: 0.75em;
+            }
+            th, td {
+                padding: 5px 3px !important;
+            }
+            /* User logs section mobile */
+            #userLogsSection {
+                padding: 0;
+            }
+            #userLogsSection > div:first-child {
+                padding: 12px 8px 8px 8px;
+                flex-direction: column;
+                gap: 8px;
+            }
+            #userLogsSearch {
+                min-width: 100%;
+                max-width: 100%;
+                font-size: 0.85em;
+            }
+            #userLogsTable {
+                font-size: 0.7em;
+            }
+            #userLogsTable th, #userLogsTable td {
+                padding: 5px 2px !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hamburger {
+                top: 15px;
+                left: 15px;
+                padding: 8px;
+            }
+            .hamburger span {
+                width: 22px;
+                height: 2px;
+            }
+            .sidebar { 
+                width: 240px;
+                left: -240px;
+                padding: 60px 12px 12px 12px;
+            }
+            .sidebar h2 {
+                font-size: 1.1em;
+                margin-bottom: 12px;
+            }
+            .sidebar button, .sidebar .logout-link {
+                padding: 8px 10px;
+                font-size: 0.8em;
+                margin: 1px 0;
+            }
+            .main-content { 
+                padding: 60px 8px 8px 8px; 
+            }
+            .glass-section {
+                padding: 12px 10px;
+                margin-bottom: 10px;
+            }
+            .glass-section h2 {
+                font-size: 1.1em;
+                margin-bottom: 10px;
+            }
+            .btn {
+                padding: 8px;
+                font-size: 0.85em;
+            }
+            input[type="text"], input[type="file"], input[type="email"], input[type="password"] {
+                padding: 6px;
+                font-size: 0.8em;
+                margin-bottom: 6px;
+            }
+            table {
+                font-size: 0.7em;
+            }
+            th, td {
+                padding: 4px 2px !important;
+            }
+            #userLogsTable {
+                font-size: 0.65em;
+            }
+            #userLogsTable th, #userLogsTable td {
+                padding: 4px 1px !important;
+            }
         }
         @keyframes fadeSlideIn {
             from { opacity: 0; transform: translateY(40px) scale(0.98); }
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
+        
+        /* Hamburger menu styles */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 10px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #fff;
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+        
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+        
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+        
+        .mobile-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
     </style>
 </head>
 <body>
+    <!-- Hamburger Menu -->
+    <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    
     <div class="dashboard-container">
-        <div class="sidebar">
+        <div class="sidebar" id="sidebar">
             <h2>Admin Panel</h2>
             <div class="sidebar-nav" style="position:relative;">
                 <div class="highlight" id="sidebarHighlight" style="top:0;"></div>
@@ -273,6 +551,7 @@
             const offset = tab.offsetTop - tab.parentElement.offsetTop;
             highlight.style.top = offset + 'px';
         }
+        
         function animateSectionIn(section) {
             section.classList.remove('active');
             section.style.opacity = 0;
@@ -284,6 +563,7 @@
                 section.style.transform = 'translateY(0) scale(1)';
             }, 60);
         }
+        
         function showSection(section) {
             console.log('Switching to section:', section);
             document.querySelectorAll('.glass-section').forEach(sec => sec.classList.remove('active'));
@@ -292,47 +572,105 @@
             addAdminTab.classList.remove('active');
             adminListTab.classList.remove('active');
             userLogsTab.classList.remove('active');
+            
+            // Check if we're on mobile (hide highlight on mobile)
+            const isMobile = window.innerWidth <= 700;
+            if (isMobile) {
+                highlight.style.display = 'none';
+            } else {
+                highlight.style.display = 'block';
+            }
+            
             if (section === 'drive') {
                 driveTab.classList.add('active');
                 document.getElementById('driveSection').classList.add('active');
-                moveHighlight(driveTab);
+                if (!isMobile) moveHighlight(driveTab);
             } else if (section === 'cred') {
                 credTab.classList.add('active');
                 document.getElementById('credSection').classList.add('active');
-                moveHighlight(credTab);
+                if (!isMobile) moveHighlight(credTab);
             } else if (section === 'addAdmin') {
                 addAdminTab.classList.add('active');
                 document.getElementById('addAdminSection').classList.add('active');
-                moveHighlight(addAdminTab);
+                if (!isMobile) moveHighlight(addAdminTab);
             } else if (section === 'adminList') {
                 adminListTab.classList.add('active');
                 document.getElementById('adminListSection').classList.add('active');
-                moveHighlight(adminListTab);
+                if (!isMobile) moveHighlight(adminListTab);
                 loadAdminList();
             } else if (section === 'userLogs') {
                 userLogsTab.classList.add('active');
                 const userLogsSection = document.getElementById('userLogsSection');
                 userLogsSection.classList.add('active');
-                userLogsSection.style.border = '3px solid #ffd86b'; // highlight for debug
-                moveHighlight(userLogsTab);
+                if (!isMobile) moveHighlight(userLogsTab);
                 loadUserLogs();
                 console.log('userLogsSection should now be visible:', userLogsSection);
             }
         }
+        
         // Initial highlight position and glass fade-in
         window.onload = function() {
-            moveHighlight(driveTab);
+            const isMobile = window.innerWidth <= 700;
+            if (isMobile) {
+                highlight.style.display = 'none';
+            } else {
+                highlight.style.display = 'block';
+                moveHighlight(driveTab);
+            }
             setTimeout(() => {
                 document.querySelectorAll('.glass-section').forEach(sec => {
                     sec.style.opacity = 1;
                 });
             }, 100);
         };
+        
         // Responsive: recalculate highlight on resize
         window.onresize = function() {
-            const activeTab = driveTab.classList.contains('active') ? driveTab : credTab;
-            moveHighlight(activeTab);
+            const isMobile = window.innerWidth <= 700;
+            if (isMobile) {
+                highlight.style.display = 'none';
+            } else {
+                highlight.style.display = 'block';
+                const activeTab = document.querySelector('.sidebar button.active') || driveTab;
+                moveHighlight(activeTab);
+            }
         };
+
+        // Hamburger menu functionality
+        const hamburger = document.getElementById('hamburger');
+        const sidebar = document.getElementById('sidebar');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+        
+        function toggleSidebar() {
+            hamburger.classList.toggle('active');
+            sidebar.classList.toggle('active');
+            mobileOverlay.style.display = sidebar.classList.contains('active') ? 'block' : 'none';
+        }
+        
+        function closeSidebar() {
+            hamburger.classList.remove('active');
+            sidebar.classList.remove('active');
+            mobileOverlay.style.display = 'none';
+        }
+        
+        // Event listeners
+        hamburger.addEventListener('click', toggleSidebar);
+        mobileOverlay.addEventListener('click', closeSidebar);
+        
+        // Close sidebar when clicking on a menu item (mobile only)
+        function addMobileMenuListeners() {
+            const menuItems = document.querySelectorAll('.sidebar button, .sidebar .logout-link');
+            menuItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    if (window.innerWidth <= 700) {
+                        setTimeout(closeSidebar, 300); // Small delay to show the click
+                    }
+                });
+            });
+        }
+        
+        // Initialize mobile menu listeners
+        addMobileMenuListeners();
 
         async function loadAdminList() {
             const res = await fetch('/admin/list_admins');

@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Face Matcher</title>
     <link
       rel="stylesheet"
@@ -10,15 +11,23 @@
   </head>
   <body>
     <div id="particles-js"></div>
-    <div class="top-bar" style="width:100%;display:flex;justify-content:flex-end;align-items:center;position:absolute;top:0;left:0;padding:16px 24px;z-index:10;">
-      <div style="margin-right:auto;color:#e67e22;font-weight:500;font-size:1em;max-width:420px;">
-        ⚠️ Please do not log in as admin while capturing or sending email. This may interrupt your process.
+    
+    <!-- Mobile Hamburger Menu for Admin Access -->
+    <div class="mobile-admin-menu" id="mobileAdminMenu" style="display:none;">
+      <div class="mobile-admin-content">
+        <h3>Admin Access</h3>
+        <a href="/admin/login?show=1" class="btn" style="width:100%;margin:10px 0;">Admin Login</a>
+        <button onclick="closeMobileAdminMenu()" class="btn" style="background:#e74c3c;width:100%;">Close</button>
       </div>
+    </div>
+    
+    <div class="top-bar" style="width:100%;display:flex;justify-content:flex-end;align-items:center;position:absolute;top:0;left:0;padding:16px 24px;z-index:10;">
       {% if session.admin_logged_in %}
         <a href="/admin/dashboard" class="btn" style="width:auto;margin-right:10px;">Admin Dashboard</a>
         <a href="/admin/logout" class="btn" style="width:auto;background:#e74c3c;color:#fff;">Logout</a>
       {% else %}
-        <a href="/admin/login?show=1" class="btn" style="width:auto;">Admin Login</a>
+        <a href="/admin/login?show=1" id="btn" style="width:auto;">Admin Login</a>
+        <button onclick="showMobileAdminMenu()" class="mobile-admin-btn" style="background:#007BFF;color:white;border:none;padding:8px 12px;border-radius:8px;margin-left:10px;cursor:pointer;">☰</button>
       {% endif %}
     </div>
     <div class="container">
@@ -54,5 +63,22 @@
 
     <script src="{{ url_for('static', filename='particles.js') }}"></script>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+        // Mobile Admin Menu Functions
+        function showMobileAdminMenu() {
+            document.getElementById('mobileAdminMenu').style.display = 'flex';
+        }
+        
+        function closeMobileAdminMenu() {
+            document.getElementById('mobileAdminMenu').style.display = 'none';
+        }
+        
+        // Close menu when clicking outside
+        document.getElementById('mobileAdminMenu').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeMobileAdminMenu();
+            }
+        });
+    </script>
   </body>
 </html>

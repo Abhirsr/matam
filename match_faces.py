@@ -8,7 +8,7 @@ import time
 # --- Config ---
 FRAME_INTERVAL = 2          # Use 1 frame every N
 CAPTURE_DURATION = 5        # seconds
-MATCH_THRESHOLD = 0.45      # Lower = more strict match
+MATCH_THRESHOLD = 0.43      # Lower = more strict match
 GALLERY_FOLDER = "static/gallery"
 MATCHED_FOLDER = "static/matched"
 

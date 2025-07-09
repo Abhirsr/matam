@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Admin Login</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <style>
@@ -96,6 +97,7 @@
     </style>
 </head>
 <body>
+    <div id="particles-js"></div>
     <div class="admin-login-box">
         <h2>Admin Login</h2>
         {% with messages = get_flashed_messages(with_categories=true) %}
@@ -111,5 +113,7 @@
             <button type="submit">Login</button>
         </form>
     </div>
+    <script src="{{ url_for('static', filename='particles.js') }}"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html> 
